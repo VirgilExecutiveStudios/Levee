@@ -1,0 +1,84 @@
+﻿# Node
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+.env
+.env.*
+!.env.example
+# Build outputs
+dist/
+build/
+coverage/
+*.tsbuildinfo
+
+# Python
+__pycache__/
+*.py[cod]
+*.class
+*.so
+.Python
+env/
+venv/
+ENV/
+.venv/
+.conda/
+.pytest_cache/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+*.cover
+*.py,cover
+.hypothesis/
+.jupyter/
+.ipynb_checkpoints/
+
+# Go
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+test.txt
+# Go build artifacts
+*.[568vq]
+[568vq].out
+*.cgo1.go
+*.cgo2.go
+_cgo_defun.cgo
+_cgo_gotypes.go
+_cgo_export.*
+_test/main.go
+_test/*.go
+
+# IDEs & Editors
+.vscode/
+.idea/
+*.sublime-workspace
+*.sublime-project
+*.sublime-settings
+*.sublime-theme
+*.tmproj
+*.tms
+*.nxsproj
+*.vcxproj
+*.sln
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Misc
+*.tmp
+*.temp
+.Dockerfile
+docker-compose.override.yml

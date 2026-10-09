@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    environment:
+      - TAVILY_API_KEY=${TAVILY_API_KEY}
+      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - DATABASE_URL=sqlite:///./levee.db
+    volumes:
+      - ./backend:/app
+      - levee_data:/app/data
+    restart: unless-stopped
+
+volumes:
+  levee_data:

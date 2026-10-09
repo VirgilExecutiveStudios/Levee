@@ -1,0 +1,21 @@
+{
+  "manifest_version": 3,
+  "name": "EdTech Verifier",
+  "version": "1.0.0",
+  "description": "Ground and verify educational content in real-time with authoritative sources.",
+  "permissions": [
+    "activeTab",
+    "scripting"
+  ],
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "128": "icons/icon128.png"
+    }
+  },
+  "icons": {
+    "16": "icons/icon16.png",
+    "128": "icons/icon128.png"
+  }
+}

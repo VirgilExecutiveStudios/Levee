@@ -1,0 +1,134 @@
+:root {
+    --primary: #2563eb;
+    --primary-hover: #1d4ed8;
+    --bg: #f3f4f6;
+    --card-bg: #ffffff;
+    --text-main: #111827;
+    --text-muted: #6b7280;
+    --warning: #f59e0b;
+    --border: #e5e7eb;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background-color: var(--bg);
+    color: var(--text-main);
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+header {
+    background: #ffffff;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 24px;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 24px;
+}
+
+header p {
+    margin: 4px 0 0;
+    color: var(--text-muted);
+    font-size: 14px;
+}
+
+.actions {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 20px;
+}
+
+button {
+    background: var(--primary);
+    color: #ffffff;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-size: 14px;
+    cursor: pointer;
+    font-weight: 500;
+}
+
+button:hover {
+    background: var(--primary-hover);
+}
+
+.cards-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+}
+
+.card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 10px;
+    margin-bottom: 14px;
+}
+
+.badge {
+    background: #fef3c7;
+    color: #92400e;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.field {
+    margin-bottom: 12px;
+}
+
+.field-label {
+    font-size: 12px;
+    font-weight: bold;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    margin-bottom: 4px;
+}
+
+textarea {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 8px;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.citations-list {
+    background: #f9fafb;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 10px;
+    margin-top: 8px;
+    font-size: 13px;
+}
+
+.citations-list a {
+    color: var(--primary);
+    text-decoration: none;
+}
+
+.citations-list a:hover {
+    text-decoration: underline;
+}
