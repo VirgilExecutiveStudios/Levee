@@ -1,3 +1,5 @@
+[![Levee Marketing Site](https://img.shields.io/badge/Levee-Marketing%20Site-00C9A7?style=for-the-badge&logo=googlechrome&logoColor=white)](https://VirgilExecutiveStudios.github.io/Levee/)
+
 # Levee
 
 Levee is an automated EdTech verification engine designed to verify educational content across websites, forms, pages, and local folders against authoritative internet data sources. It provides real-time grounding, confidence scoring, and human-in-the-loop review to ensure the accuracy and reliability of educational concepts.
@@ -13,17 +15,27 @@ Levee is an automated EdTech verification engine designed to verify educational 
 
 ## 🔗 Links
 
-- **Live Demo**: https://levee.example.com
-- **Documentation**: https://docs.levee.example.com
-- **API Reference**: https://api.levee.example.com
-- **Source Code**: https://github.com/your-org/levee
+- **Live Demo**: https://VirgilExecutiveStudios.github.io/Levee/
+- **Documentation**: https://VirgilExecutiveStudios.github.io/Levee/
+- **API Reference**: https://VirgilExecutiveStudios.github.io/Levee/
+- **Source Code**: https://github.com/VirgilExecutiveStudios/Levee
+- **Official Marketing & Documentation Site**: https://VirgilExecutiveStudios.github.io/Levee/
+- [Levee.Github - Automated Sourcing & More](https://VirgilExecutiveStudios.github.io/Levee/)
 
 ## 📁 Project Structure
 
 ```
 Levee/
 ├── assets/                   # Static assets (logos, images)
+│   ├── logo.svg
 │   └── .gitkeep
+├── apps/                     # Additional web applications
+│   ├── installer/            # Installation wizard UI
+│   │   └── index.html
+│   ├── local-app/            # Local verification tool dashboard
+│   │   └── index.html
+│   └── marketing/            # Marketing site / documentation landing page
+│       └── index.html
 ├── backend/                  # FastAPI backend service
 │   ├── Dockerfile
 │   ├── config.py
@@ -56,6 +68,7 @@ Levee/
 ## 🛠️ Installation & Setup
 
 ### Prerequisites
+
 - Docker and Docker Compose
 - API keys for Tavily and at least one LLM provider (OpenAI, Anthropic, etc.)
 
@@ -63,7 +76,7 @@ Levee/
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/your-org/levee.git
+   git clone https://github.com/VirgilExecutiveStudios/Levee.git
    cd levee
    ```
 
@@ -119,4 +132,5 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - Icon generated via [HeroPatterns](https://www.heropatterns.com/)
 
 ---
+
 *Levee: Verifying Education, One Concept at a Time.*

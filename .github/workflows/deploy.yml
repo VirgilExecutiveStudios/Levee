@@ -1,0 +1,58 @@
+name: Deploy Marketing Site to GitHub Pages
+
+on:
+  push:
+    branches: [ main, master ]
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: |
+          # No npm dependencies needed for static site
+          echo "Marketing site is static HTML/CSS/JS - no build dependencies"
+
+      - name: Build Marketing Site
+        run: |
+          # Create _site directory for GitHub Pages
+          mkdir -p _site
+          # Copy marketing site files to _site (excluding node_modules, etc.)
+          cp -r apps/marketing/* _site/
+          # Ensure we have an index.html
+          if [ ! -f _site/index.html ]; then
+            echo "Error: index.html not found in marketing site"
+            exit 1
+          fi
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

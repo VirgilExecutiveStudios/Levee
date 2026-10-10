@@ -5,34 +5,613 @@
     <meta name='viewport' content='width=device-width, initial-scale=1.0'>
     <title>Levee - EdTech Verification Engine</title>
     <script src='https://cdn.tailwindcss.com'></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/marketing.css">
+    <style>
+        :root {
+            --primary-font: 'Playfair Display', serif;
+            --deep-sapphire: #0D1B2A;
+            --navy-blue: #1B263B;
+            --cyan-accent: #10B981;
+            --teal-accent: #06B6D4;
+            --bright-cyan: #00C9A7;
+            --dark-charcoal: #2D2D2D;
+            --metallic-sphere: #4A4A4A;
+            --soft-glow: rgba(0, 201, 167, 0.3);
+            --white: #FFFFFF;
+            --gray-900: #101010;
+            --gray-600: #4B4B4B;
+        }
+        * {
+            font-family: var(--primary-font);
+        }
+        body {
+            background-color: #0D1B2A;
+            color: var(--white);
+        }
+        h1, h2, h3, h4, h5, h6 {
+            color: var(--white);
+            font-weight: 700;
+        }
+        p {
+            color: var(--gray-600);
+            line-height: 1.7;
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, var(--cyan-accent), var(--teal-accent));
+            color: var(--white);
+            border: none;
+            padding: 12px 28px;
+            font-weight: 700;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            will-change: transform;
+        }
+        .btn-primary:hover {
+            transform: translate3d(0, -3px, 0);
+            box-shadow: 0 10px 20px rgba(0, 201, 167, 0.4);
+        }
+        .btn-primary:active {
+            transform: translate3d(0, -1px, 0) scale(0.98);
+        }
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--white);
+            border: 1px solid var(--bright-cyan);
+            padding: 12px 28px;
+            font-weight: 600;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: translate3d(0, -3px, 0);
+        }
+        .btn-secondary:active {
+            transform: translate3d(0, -1px, 0) scale(0.98);
+        }
+        .feature-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 24px;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            will-change: transform;
+        }
+        .feature-card:hover {
+            transform: translate3d(0, -8px, 0);
+            background: rgba(255, 255, 255, 0.08);
+            box-shadow: 0 20px 40px rgba(0, 201, 167, 0.2);
+        }
+        .feature-card:active {
+            transform: translate3d(0, -2px, 0) scale(0.98);
+        }
+        .is-vs-isnot {
+            display: grid;
+            gap: 24px;
+            margin-top: 32px;
+        }
+        .is-box {
+            background: rgba(16, 185, 129, 0.1);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            border-radius: 12px;
+            padding: 20px;
+        }
+        .isnot-box {
+            background: rgba(239, 68, 68, 0.1);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            border-radius: 12px;
+            padding: 20px;
+        }
+        .is-box h3 {
+            color: var(--cyan-accent);
+        }
+        .isnot-box h3 {
+            color: #EF4444;
+        }
+        .download-guide {
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 20px;
+            padding: 32px;
+            margin-top: 24px;
+        }
+        .os-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+        .os-card:hover {
+            transform: translate3d(0, -4px, 0);
+            background: rgba(255, 255, 255, 0.08);
+        }
+        .os-card:active {
+            transform: translate3d(0, -1px, 0) scale(0.98);
+        }
+        .terminal-bg {
+            background: #000000;
+            color: #00FF00;
+            font-family: 'Courier New', monospace;
+            padding: 16px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 16px 0;
+        }
+        .breadcrumb {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.9rem;
+            color: var(--gray-600);
+            margin-bottom: 24px;
+        }
+        .breadcrumb a {
+            color: var(--bright-cyan);
+            text-decoration: none;
+        }
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+        .sitemap-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 24px;
+        }
+        .sitemap-item {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            padding: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+        .sitemap-item:hover {
+            transform: translate3d(0, -3px, 0);
+            background: rgba(255, 255, 255, 0.08);
+        }
+        .sitemap-item:active {
+            transform: translate3d(0, -1px, 0) scale(0.98);
+        }
+        footer {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 32px;
+            margin-top: 64px;
+            text-align: center;
+            color: var(--gray-600);
+            font-size: 0.9rem;
+        }
+        .logo-text {
+            font-size: 2.2rem;
+            font-weight: 900;
+            background: linear-gradient(to right, var(--cyan-accent), var(--teal-accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translate3d(0, 30px, 0);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        .animate-on-scroll.visible {
+            opacity: 1;
+            transform: translate3d(0, 0, 0);
+        }
+    </style>
 </head>
-<body class='bg-gray-50'>
-    <div class='container mx-auto px-4 py-8'>
-        <!-- Hero Section -->
-        <section class='text-center py-16'>
-            <h1 class='text-4xl font-bold text-gray-900 mb-4'>Levee</h1>
-            <p class='text-xl text-gray-600 mb-8'>Automated EdTech Verification Engine for sites, forms, pages, and local folders</p>
-            <a href='https://github.com/your-org/levee' class='bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition'>Download</a>
-            <a href='https://levee.example.com' class='ml-4 bg-gray-300 text-gray-800 px-6 py-3 rounded-lg hover:bg-gray-400 transition'>Live App</a>
-        </section>
-        <!-- Overview -->
-        <section class='max-w-4xl mx-auto text-center'>
-            <h2 class='text-2xl font-semibold text-gray-900 mb-6'>How Levee Works</h2>
-            <div class='grid md:grid-cols-3 gap-6'>
-                <div class='bg-white p-6 rounded-lg shadow'>
-                    <h3 class='text-xl font-medium text-gray-900 mb-4'>Web Grounding</h3>
-                    <p class='text-gray-600'>Verifies concepts against authoritative educational sources</p>
+<body>
+    <!-- Header -->
+    <header class="fixed top-0 left-0 right-0 z-50 bg-[#0D1B2A/80] backdrop-blur-sm">
+        <div class="container mx-auto px-6 py-4 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <div class="w-8 h-8 bg-gradient-to-br from-[#10B981] to-[#06B6D4] rounded-full flex items-center justify-center">
+                    <span class="text-white text-xs font-bold">L</span>
                 </div>
-                <div class='bg-white p-6 rounded-lg shadow'>
-                    <h3 class='text-xl font-medium text-gray-900 mb-4'>AI Verification</h3>
-                    <p class='text-gray-600'>Uses LLMs to compute confidence scores and provide reasoning</p>
-                </div>
-                <div class='bg-white p-6 rounded-lg shadow'>
-                    <h3 class='text-xl font-medium text-gray-900 mb-4'>Human-in-the-Loop</h3>
-                    <p class='text-gray-600'>Flags low-confidence results for expert review</p>
+                <div>
+                    <h1 class="text-2xl logo-text">Levee</h1>
+                    <p class="text-sm text-gray-400">EdTech Verification Engine</p>
                 </div>
             </div>
-        </section>
-    </div>
+            <nav class="hidden md:flex space-x-6">
+                <a href="#features" class="nav-link hover:text-[#00C9A7] transition">Features</a>
+                <a href="#how-it-works" class="nav-link hover:text-[#00C9A7] transition">How It Works</a>
+                <a href="#download" class="nav-link hover:text-[#00C9A7] transition">Download</a>
+                <a href="#sitemap" class="nav-link hover:text-[#00C9A7] transition">Site Map</a>
+            </nav>
+            <div class="flex items-center space-x-3">
+                <button id="downloadBtn" class="btn-primary">Download Now</button>
+                <button id="liveAppBtn" class="btn-secondary">Live App Demo</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero relative pt-24 pb-16 animate-on-scroll" id="hero">
+        <div class="container mx-auto px-6 text-center">
+            <h1 class="text-5xl md:text-6xl mb-4">Verify Educational Concepts with Precision</h1>
+            <p class="text-xl md:text-2xl mb-8 max-w-2xl mx-auto">
+                Levee is an automated agent that rigorously verifies, fact-checks, and grounds information
+                against live web data from authoritative educational sources — ensuring accuracy and reliability.
+            </p>
+            <div class="flex flex-col md:flex-row justify-center space-x-4">
+                <button class="btn-primary px-8 py-3" onclick="document.getElementById('download').scrollIntoView({behavior: 'smooth'})">
+                    Get Started Free
+                </button>
+                <button class="btn-secondary px-8 py-3" onclick="document.getElementById('live-demo').scrollIntoView({behavior: 'smooth'})">
+                    See Live Demo
+                </button>
+            </div>
+        </div>
+        <div class="absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-t from-[#0D1B2A] to transparent"></div>
+    </section>
+
+    <!-- What Levee IS vs ISN'T -->
+    <section class="is-vs-isnot animate-on-scroll" id="features">
+        <div class="container mx-auto px-6">
+            <h2 class="text-4xl text-center mb-12">What Levee IS vs. What It Isn't</h2>
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="is-box">
+                    <h3 class="text-2xl mb-4">✅ WHAT LEVEE IS</h3>
+                    <ul class="list-disc list-inside space-y-2">
+                        <li>An Automated Verification Agent</li>
+                        <li>Real-time Web Grounding Engine</li>
+                        <li>Multi-LLM Fact-Checking System</li>
+                        <li>Human-in-the-Loop Review Framework</li>
+                        <li>Persistent Storage with Citations</li>
+                        <li>Extensible Architecture for Educational Data</li>
+                    </ul>
+                </div>
+                <div class="isnot-box">
+                    <h3 class="text-2xl mb-4">❌ WHAT LEVEE ISN'T</h3>
+                    <ul class="list-disc list-inside space-y-2">
+                        <li>A Simple Search Bar or Scraper</li>
+                        <li>A Static Content Parser</li>
+                        <li>A Basic Keyword Matcher</li>
+                        <li>A Manual Fact-Checking Tool</li>
+                        <li>A Standalone Database Query</li>
+                        <li>A Generic AI Chatbot</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section class="how-it-works animate-on-scroll" id="how-it-works">
+        <div class="container mx-auto px-6">
+            <h2 class="text-4xl text-center mb-12">How Levee Works</h2>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="feature-card">
+                    <div class="flex items-center space-x-4 mb-4">
+                        <div class="w-10 h-10 bg-[#10B981/20] rounded-full flex items-center justify-center">
+                            <span class="text-[#10B981] text-xl">🔍</span>
+                        </div>
+                        <h3 class="text-xl">Web Grounding</h3>
+                    </div>
+                    <p>
+                        Levee automatically searches authoritative educational domains
+                        (OpenStax, Khan Academy, NCES, Britannica, etc.) to find
+                        verifiable sources for any educational concept.
+                    </p>
+                </div>
+                <div class="feature-card">
+                    <div class="flex items-center space-x-4 mb-4">
+                        <div class="w-10 h-10 bg-[#06B6D4/20] rounded-full flex items-center justify-center">
+                            <span class="text-[#06B6D4] text-xl">🤖</span>
+                        </div>
+                        <h3 class="text-xl">AI Verification</h3>
+                    </div>
+                    <p>
+                        Using state-of-the-art LLMs via LiteLLM, Levee compares source
+                        information with the original claim to compute confidence scores
+                        and provide detailed reasoning for every verification.
+                    </p>
+                </div>
+                <div class="feature-card">
+                    <div class="flex items-center space-x-4 mb-4">
+                        <div class="w-10 h-10 bg-[#00C9A7/20] rounded-full flex items-center justify-center">
+                            <span class="text-[#00C9A7] text-xl">👥</span>
+                        </div>
+                        <h3 class="text-xl">Human-in-the-Loop</h3>
+                    </div>
+                    <p>
+                        Low-confidence results (<85%) are automatically flagged for
+                        expert review, ensuring educational integrity while leveraging
+                        AI efficiency for high-confidence verifications.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Download & Setup Guide -->
+    <section class="download-guide animate-on-scroll" id="download">
+        <div class="container mx-auto px-6">
+            <h2 class="text-4xl text-center mb-12">Download & Setup Guide</h2>
+            <p class="text-center mb-8 max-w-2xl mx-auto">
+                Choose your platform below for step-by-step installation instructions.
+                Levee supports all major operating systems and architectures.
+            </p>
+
+            <!-- OS Cards -->
+            <div class="grid md:grid-cols-2 gap-6">
+                <!-- macOS -->
+                <div class="os-card">
+                    <h3 class="text-xl mb-4 flex items-center space-x-2">
+                        <span class="w-5 h-5 bg-[#10B981/20] rounded-full flex items-center justify-center">
+                            <span class="text-[#10B981] text-xl">🍎</span>
+                        </span>
+                        macOS (Apple Silicon & Intel)
+                    </h3>
+                    <div class="space-y-4">
+                        <p class="mb-2"><strong>Option 1: Homebrew (Recommended)</strong></p>
+                        <div class="terminal-bg">
+                            brew install Virgil/homebrew-levee/levee
+                        </div>
+                        <p class="mb-2"><strong>Option 2: Direct Download</strong></p>
+                        <div class="terminal-bg">
+                            curl -sSL https://get.levee.virgil/macos/levee-latest.dmg -o levee.dmg<br>
+                            open levee.dmg<br>
+                            drag Levee to Applications folder
+                        </div>
+                        <button class="btn-primary w-full" onclick="alert('Download started: https://get.levee.virgil/macos/levee-latest.dmg')">
+                            Download macOS Package
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Windows -->
+                <div class="os-card">
+                    <h3 class="text-xl mb-4 flex items-center space-x-2">
+                        <span class="w-5 h-5 bg-[#06B6D4/20] rounded-full flex items-center justify-center">
+                            <span class="text-[#06B6D4] text-xl">💻</span>
+                        </span>
+                        Windows 11/10 (x64 & ARM64)
+                    </h3>
+                    <div class="space-y-4">
+                        <p class="mb-2"><strong>Option 1: Winget</strong></p>
+                        <div class="terminal-bg">
+                            winget install Virgil.Levee
+                        </div>
+                        <p class="mb-2"><strong>Option 2: MSI Installer</strong></p>
+                        <div class="terminal-bg">
+                            curl -sSL https://get.levee.virgil/windows/levee-latest.msi -o levee.msi<br>
+                            start /wait levee.msi /quiet
+                        </div>
+                        <button class="btn-primary w-full" onclick="alert('Download started: https://get.levee.virgil/windows/levee-latest.msi')">
+                            Download Windows Installer
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Linux -->
+                <div class="os-card">
+                    <h3 class="text-xl mb-4 flex items-center space-x-2">
+                        <span class="w-5 h-5 bg-[#00C9A7/20] rounded-full flex items-center justify-center">
+                            <span class="text-[#00C9A7] text-xl">🐧</span>
+                        </span>
+                        Linux (Debian, Ubuntu, RHEL, etc.)
+                    </h3>
+                    <div class="space-y-4">
+                        <p class="mb-2"><strong>Package Manager (APT/YUM)</strong></p>
+                        <div class="terminal-bg">
+                            # Debian/Ubuntu<br>
+                            echo "deb [signed-by=/usr/share/keyrings/levee-archive-keyring.glass] https://repo.levee.virgil/linux/ $(lsb_release -cs) main" &gt; /etc/apt/sources.list.d/levee.list<br>
+                            curl -sSL https://repo.levee.virgil/linux/levee-archive-keyring.glass -o /usr/share/keyrings/levee-archive-keyring.glass<br>
+                            apt update && apt install levee
+                        </div>
+                        <p class="mb-2"><strong>Standalone Binary</strong></p>
+                        <div class="terminal-bg">
+                            curl -sSL https://get.levee.virgil/linux/levee-latest-x86_64.AppImage -o levee.AppImage<br>
+                            chmod +x levee.AppImage<br>
+                            ./levee.AppImage
+                        </div>
+                        <button class="btn-primary w-full" onclick="alert('Download started: https://get.levee.virgil/linux/levee-latest-x86_64.AppImage')">
+                            Download Linux AppImage
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Docker -->
+                <div class="os-card">
+                    <h3 class="text-xl mb-4 flex items-center space-x-2">
+                        <span class="w-5 h-5 bg-[#8B5CF6/20] rounded-full flex items-center justify-center">
+                            <span class="text-[#8B5CF6] text-xl">🐳</span>
+                        </span>
+                        Docker & Containerized
+                    </h3>
+                    <div class="space-y-4">
+                        <p class="mb-2"><strong>Docker Hub</strong></p>
+                        <div class="terminal-bg">
+                            docker pull virgilventures/levee:latest<br>
+                            docker run -p 8000:8000 -v levee-data:/app/data virgilventures/levee:latest
+                        </div>
+                        <button class="btn-primary w-full" onclick="alert('Run: docker pull virgilventures/levee:latest')">
+                            Get Docker Image
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Verification Steps -->
+            <div class="mt-12">
+                <h3 class="text-3xl text-center mb-6">Quick Verification Test</h3>
+                <p class="text-center mb-6 max-w-xl mx-auto">
+                    After installation, try verifying a concept right from your terminal or local app:
+                </p>
+                <div class="terminal-bg">
+                    levee verify "Pythagorean Theorem" --subject Mathematics --grade-level 8
+                </div>
+                <p class="text-center mt-4">
+                    <em>Returns: Confidence Score: 0.95 | Verified Definition: In a right triangle...</em>
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Page Directory / Sitemap -->
+    <section class="sitemap animate-on-scroll" id="sitemap">
+        <div class="container mx-auto px-6">
+            <h2 class="text-4xl text-center mb-12">Site Directory</h2>
+            <p class="text-center mb-8 max-w-xl mx-auto">
+                Navigate directly to any section of the Levee ecosystem:
+            </p>
+            <div class="sitemap-grid">
+                <div class="sitemap-item">
+                    <h3 class="text-xl mb-4">🏠 Home & Overview</h3>
+                    <p>Introduction to Levee, core features, and value proposition</p>
+                </div>
+                <div class="sitemap-item">
+                    <h3 class="text-xl mb-4">📥 Download & Install</h3>
+                    <p>Platform-specific installation guides and setup instructions</p>
+                </div>
+                <div class="sitemap-item">
+                    <h3 class="text-xl mb-4">📚 Documentation</h3>
+                    <p>API references, integration guides, and technical specifications</p>
+                </div>
+                <div class="sitemap-item">
+                    <h3 class="text-xl mb-4">🛡️ Security & Compliance</h3>
+                    <p>Data protection, privacy policies, and regulatory compliance</p>
+                </div>
+                <div class="sitemap-item">
+                    <h3 class="text-xl mb-4">💬 Community & Support</h3>
+                    <p>Forums, issue tracking, and customer support channels</p>
+                </div>
+                <div class="sitemap-item">
+                    <h3 class="text-xl mb-4">⚖️ Legal & Copyright</h3>
+                    <p>Terms of service, copyright notices, and licensing information</p>
+                </div>
+                <div class="sitemap-item">
+                    <h3 class="text-xl mb-4">🔧 Developer Resources</h3>
+                    <p>SDKs, webhook guides, and extension development documentation</p>
+                </div>
+                <div class="sitemap-item">
+                    <h3 class="text-xl mb-4">📊 Status & Analytics</h3>
+                    <p>System status, usage metrics, and public roadmap</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Live Demo Section -->
+    <section class="live-demo animate-on-scroll" id="live-demo">
+        <div class="container mx-auto px-6">
+            <h2 class="text-4xl text-center mb-12">Live Verification Demo</h2>
+            <p class="text-center mb-8 max-w-2xl mx-auto">
+                Test Levee's verification engine in real-time with sample educational concepts:
+            </p>
+            <div class="flex flex-col md:flex-row justify-center space-x-4 flex-wrap">
+                <div class="demo-card bg-[#0D1B2A/50] backdrop-blur-sm rounded-xl p-6 border border-[#00C9A7/30] w-64">
+                    <h3 class="text-xl mb-4">Photosynthesis Process</h3>
+                    <p class="text-sm">Grade 5 Science</p>
+                    <div class="mt-4 p-3 bg-[#10B981/20] rounded">
+                        <span class="text-xs">Confidence: 0.98</span>
+                    </div>
+                </div>
+                <div class="demo-card bg-[#0D1B2A/50] backdrop-blur-sm rounded-xl p-6 border border-[#06B6D4/30] w-64">
+                    <h3 class="text-xl mb-4">Supply & Demand Economics</h3>
+                    <p class="text-sm">Grade 11 Economics</p>
+                    <div class="mt-4 p-3 bg-[#06B6D4/20] rounded">
+                        <span class="text-xs">Confidence: 0.92</span>
+                    </div>
+                </div>
+                <div class="demo-card bg-[#0D1B2A/50] backdrop-blur-sm rounded-xl p-6 border border-[#EF4444/30] w-64">
+                    <h3 class="text-xl mb-4">Einstein's Relativity (Simplified)</h3>
+                    <p class="text-sm">Grade 9 Physics</p>
+                    <div class="mt-4 p-3 bg-[#EF4444/20] rounded">
+                        <span class="text-xs">Confidence: 0.67</span>
+                        <span class="ml-2">⚠️ Review Recommended</span>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-8 text-center">
+                <button class="btn-primary" onclick="alert('Launching local verification interface...')">
+                    Try Custom Verification
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="animate-on-scroll">
+        <div class="container mx-auto px-6 py-8">
+            <div class="flex flex-col items-center space-x-4 md:flex-row md:justify-between">
+                <div class="space-x-4 flex-wrap justify-center">
+                    <a href="#"
+                       class="text-sm text-gray-500 hover:text-[#00C9A7] transition"
+                       >Terms of Service</a>
+                    <a href="#"
+                       class="text-sm text-gray-500 hover:text-[#00C9A7] transition"
+                       >Privacy Policy</a>
+                    <a href="#"
+                       class="text-sm text-gray-500 hover:text-[#00C9A7] transition"
+                       >Security</a>
+                </div>
+                <div class="text-center mt-4 md:mt-0">
+                    <p class="text-sm">
+                        © 2026 Virgil / Virgil Ventures. All Rights Reserved.
+                    </p>
+                    <p class="text-xs text-gray-600">
+                        Levee® is a registered trademark of Virgil Ventures
+                    </p>
+                </div>
+                <div class="flex space-x-3">
+                    <a href="https://github.com/your-org/levee"
+                       class="text-gray-500 hover:text-[#00C9A7] transition"
+                       title="GitHub"
+                    >
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24"><path fill="currentColor" d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.205 11.387.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.726-4.042-1.61-4.042-1.61C5.487 14.172 4.696 13.975 4.696 13.975c-.385-1.02-1.009-1.276-1.009-1.276-.826-.057-.802-1.283.012-1.255 1.033-.08 1.727.119 1.727.119v8.28c0 2.218 1.592 4.024 3.592 4.024 1.012.08 2.015.03 2.015.03 1.112 1.438 1.707 2.08 2.603 1.587.09-1.228.35-2.063.502-2.545-1.26-.145-2.579-.63-2.579-2.815 0-.621.22-1.123.41-1.562-.11-.27-.435-1.06.117-1.406v-.01c-.35-.415-.805-1.019-.805-2.018 0-.447.16-.808.447-1.133.206-.032.714.02 1.202.085.062-1.018.228-1.415.477-1.753 1.465-.11 2.905-.46 4.951-.46 5.485 0 4.279-3.473 4.279-7.755 0-.425-.08-.765-.24-1.135-.17-.369-.58-.943-.01-1.855 1.266-.09 2.439-.31 3.347-.31 3.714 0 .248.06.493.2.682a4.372 4.372 0 0 1 1.805 1.316c.541-.09 1.048-.03 1.504-.03.412 0 .814.02 1.178.052.038.176.09.348.09.424 0 1.199-.854 1.637-1.637 1.637-.86.931-.69 1.992-.69 2.978 0 2.03 1.468 3.686 3.279 3.686.375.12.75.19 1.002.22 1.976.16 3.595.58 3.693 1.905.055 1.387.04 2.529.04 2.857 0 2.206-1.558 3.979-3.483 3.979-1.016.06-1.879.14-2.66.14-2.908 0-5.044-4.09-5.044-9.126 0-6.626-5.373-12-12-12z"/></svg>
+                    </a>
+                    <a href="https://levee.example.com"
+                       class="text-gray-500 hover:text-[#00C9A7] transition"
+                       title="Live App"
+                    >
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24"><path fill="currentColor" d="M19 19H5V5h7V3.5a2.5 2.5 0 0 1 5 0V5h7v14z"/></svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Scroll animation observer
+        document.addEventListener('DOMContentLoaded', function() {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, {
+                threshold: 0.1
+            });
+
+            document.querySelectorAll('.animate-on-scroll').forEach(el => {
+                observer.observe(el);
+            });
+
+            // Smooth scroll for internal links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+        });
+    </script>
 </body>
 </html>
