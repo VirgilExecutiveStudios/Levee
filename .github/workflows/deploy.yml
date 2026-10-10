@@ -10,49 +10,37 @@ permissions:
   id-token: write
 
 jobs:
-  build:
+  deploy:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-          cache: 'npm'
+      - name: Setup GitHub Pages
+        uses: actions/configure-pages@v5
 
-      - name: Install dependencies
+      - name: Verify marketing site exists
         run: |
-          # No npm dependencies needed for static site
-          echo "Marketing site is static HTML/CSS/JS - no build dependencies"
+          echo "Checking marketing site directory..."
+          ls -la apps/marketing/
+          echo "Checking for index.html..."
+          ls -la apps/marketing/index.html || echo "index.html not found!"
 
-      - name: Build Marketing Site
+      - name: Prepare site for deployment
         run: |
-          # Create _site directory for GitHub Pages
+          echo "Creating _site directory..."
           mkdir -p _site
-          # Copy marketing site files to _site (excluding node_modules, etc.)
+          echo "Copying marketing site files..."
           cp -r apps/marketing/* _site/
-          # Ensure we have an index.html
-          if [ ! -f _site/index.html ]; then
-            echo "Error: index.html not found in marketing site"
-            exit 1
-          fi
+          echo "Contents of _site:"
+          ls -la _site/
+          echo "Checking for index.html in _site..."
+          ls -la _site/index.html || echo "index.html not found in _site!"
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
           path: _site
 
-  deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
-    needs: build
-    steps:
       - name: Deploy to GitHub Pages
-        id: deployment
         uses: actions/deploy-pages@v4
